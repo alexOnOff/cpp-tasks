@@ -2,7 +2,7 @@
 
 #include "Parent.hpp"
 
-class AnotherChild : public Parent
+class AnotherChild : virtual public Parent
 {
 public:
     AnotherChild();
