@@ -6,7 +6,7 @@ add_executable(oop
     src/Child.cpp
     src/AnotherChild.cpp
     src/StepChild.cpp
-)
+ "src/ThirdChild.cpp")
 
 target_include_directories(oop
     PUBLIC
