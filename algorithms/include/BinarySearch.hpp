@@ -1,0 +1,24 @@
+#pragma once
+
+
+template<typename T>
+int BinarySearch(T* array,T value , unsigned low_range, unsigned high_range)
+{
+    unsigned mid = low_range + (high_range - low_range)/2;
+
+    if(low_range >= high_range)
+        return ~low_range;
+
+    if (array[mid] == value)
+    {
+        return mid;
+    }
+    else if(array[mid] > value)
+    {
+        return BinarySearch(array, value, low_range, mid);
+    }
+    else
+    {
+        return BinarySearch(array, value, mid+1, high_range);
+    }
+}
