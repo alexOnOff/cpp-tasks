@@ -1,45 +1,26 @@
 #pragma once
+#include "BinarySearch.hpp"
 
 template<typename T>
 T* BinaryInsertSort(T* array, unsigned size)
 {
     for (size_t i = 1; i < size; i++)
     {
-        size_t low_range = 0;
-        size_t high_range = i - 1;
-        size_t middle;
+        int low_range = 0;
+        int high_range = i - 1;
+        int middle;
+
+        int j = i - 1;
         T key = array[i];
 
-        while (high_range > low_range)
+        int pos = BinarySearch(array, key, 0, j);
+
+        while (j >= pos)
         {
-            middle = low_range + (high_range - low_range) / 2;
-
-            if (key < array[middle])
-            {
-                high_range = middle;
-            }
-            else
-            {
-                low_range = middle + 1 ;
-            }
+            array[j + 1] = array[j];
+            j--;
         }
-
-        for (int j = i; low_range < j; j--)
-        {
-            array[j] = array[j-1];
-        }
-
-        array[low_range] = key;
-
-
-        //std::cout << std::endl << "Iteration:" << i <<  std::endl;
-
-        //for (size_t i = 0; i < size; i++)
-        //{
-        //    std::cout << array[i] << ' ';
-        //}
-
-        //std::cout << std::endl;
+        array[j + 1] = key;
     }
 
     return array;
