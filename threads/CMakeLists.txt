@@ -3,7 +3,8 @@ project(Threads)
 add_executable(threads
     src/main.cpp
     src/Waiter.cpp
- "src/Counter.cpp")
+    src/Counter.cpp
+)
 
 target_include_directories(threads
     PUBLIC
