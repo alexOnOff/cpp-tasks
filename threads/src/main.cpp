@@ -4,6 +4,7 @@
 #include "Waiter.hpp"
 #include "Counter.hpp"
 #include "QueueTask.hpp"
+#include "ArraySumTask.hpp"
 
 int main()
 {
@@ -30,8 +31,16 @@ int main()
     // QueueTask (Producer and Consumer)
     ///////////////////////////////////////////
 
-    QueueTask* task = new QueueTask();
+    //QueueTask* task = new QueueTask();
+    //task->Run();
+
+    ///////////////////////////////////////////
+    // Array sum
+    ///////////////////////////////////////////
+
+    ArraySumTask* task = new ArraySumTask(10,5);
     task->Run();
+    task->Check();
 
     return 0;
 }

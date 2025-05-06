@@ -5,6 +5,7 @@ add_executable(threads
     src/Waiter.cpp
     src/Counter.cpp
     src/QueueTask.cpp
+    src/ArraySumTask.cpp
 )
 
 target_include_directories(threads
