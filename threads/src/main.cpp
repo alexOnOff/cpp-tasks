@@ -3,6 +3,7 @@
 #include <chrono>
 #include "Waiter.hpp"
 #include "Counter.hpp"
+#include "QueueTask.hpp"
 
 int main()
 {
@@ -21,9 +22,16 @@ int main()
     // Counter
     ///////////////////////////////////////////
 
-    Counter* counter = new Counter();
-    //counter->Run();
-    counter->RunAtomic();
+    //Counter* counter = new Counter();
+    ////counter->Run();
+    //counter->RunAtomic();
+
+    ///////////////////////////////////////////
+    // QueueTask (Producer and Consumer)
+    ///////////////////////////////////////////
+
+    QueueTask* task = new QueueTask();
+    task->Run();
 
     return 0;
 }
