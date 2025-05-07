@@ -5,6 +5,7 @@
 #include "Counter.hpp"
 #include "QueueTask.hpp"
 #include "ArraySumTask.hpp"
+#include "ParallelSortTask.hpp"
 
 int main()
 {
@@ -38,7 +39,15 @@ int main()
     // Array sum
     ///////////////////////////////////////////
 
-    ArraySumTask* task = new ArraySumTask(1000000000,16);
+    //ArraySumTask* task = new ArraySumTask(1000000000,16);
+    //task->Run();
+    //task->Check();
+
+    ///////////////////////////////////////////
+    // Sort
+    ///////////////////////////////////////////
+
+    ParallelSortTask* task = new ParallelSortTask(1000000000, 16);
     task->Run();
     task->Check();
 
