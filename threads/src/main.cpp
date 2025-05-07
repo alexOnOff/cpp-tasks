@@ -38,7 +38,7 @@ int main()
     // Array sum
     ///////////////////////////////////////////
 
-    ArraySumTask* task = new ArraySumTask(10,5);
+    ArraySumTask* task = new ArraySumTask(1000000000,16);
     task->Run();
     task->Check();
 
