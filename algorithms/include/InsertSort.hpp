@@ -1,17 +1,17 @@
 #pragma once
 
 template<typename T>
-T* InsertSort(T* array, unsigned size)
+T InsertSort(T& array, unsigned size)
 {
     for (size_t i = 1; i < size; i++)
     {
-        size_t j = i - 1;
-        T key = array[i];
+        int j = i - 1;
+        auto key = array[i];
 
-        while (array[j] > key && j >= 0)
+        while (j >= 0 && array[j] > key)
         {
             array[j+1] = array[j];
-            j -= 1;
+            j--;
         }
 
         array[j + 1] = key;

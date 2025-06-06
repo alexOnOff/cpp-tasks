@@ -1,8 +1,8 @@
 #pragma once
 
 
-template<typename T>
-int BinarySearch(T* array,T value , unsigned low_range, unsigned high_range)
+template<typename vec, typename type>
+int BinarySearch(vec& array, type value , unsigned low_range, unsigned high_range)
 {
     int mid = low_range + (high_range - low_range)/2;
 

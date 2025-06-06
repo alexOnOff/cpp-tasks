@@ -1,8 +1,8 @@
 #pragma once
 #include "BinarySearch.hpp"
 
-template<typename T>
-T* BinaryInsertSort(T* array, unsigned size)
+template<typename vec, typename type>
+void BinaryInsertSort(vec& array, unsigned size)
 {
     for (size_t i = 1; i < size; i++)
     {
@@ -11,17 +11,16 @@ T* BinaryInsertSort(T* array, unsigned size)
         int middle;
 
         int j = i - 1;
-        T key = array[i];
+        type key = array[i];
 
-        int pos = BinarySearch(array, key, 0, j);
+        int pos = BinarySearch<vec, type>(array, key, 0, j);
 
         while (j >= pos)
         {
             array[j + 1] = array[j];
             j--;
         }
+
         array[j + 1] = key;
     }
-
-    return array;
 }

@@ -2,8 +2,8 @@
 
 #include <algorithm>
 
-template<typename T> 
-T* BubbleSort(T* array, unsigned size)
+template<typename vec, typename type>
+void BubbleSort(vec& array, unsigned size)
 {
     for (size_t i = 0; i < size - 1; i++)
     {
@@ -15,6 +15,4 @@ T* BubbleSort(T* array, unsigned size)
             }
         }
     }
-
-    return array;
 }
