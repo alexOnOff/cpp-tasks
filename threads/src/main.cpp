@@ -47,7 +47,7 @@ int main()
     // Sort
     ///////////////////////////////////////////
 
-    ParallelSortTask* task = new ParallelSortTask(1000000000, 16);
+    ParallelSortTask* task = new ParallelSortTask(10000,8);
     task->Run();
     task->Check();
 

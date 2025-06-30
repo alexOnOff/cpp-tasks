@@ -12,4 +12,5 @@ add_executable(threads
 target_include_directories(threads
     PUBLIC
         ${PROJECT_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/algorithms/include
 )
