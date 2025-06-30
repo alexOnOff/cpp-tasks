@@ -1,2 +1,2 @@
-# cpp-interview
-Repo for interview tasks
+# cpp-tasks
+Repo for c++ tasks
