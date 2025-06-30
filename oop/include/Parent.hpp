@@ -4,7 +4,7 @@ class Parent
 {
 public:
     Parent();
-    ~Parent();
+    virtual ~Parent();
 
     virtual void Do();
     void AnotherDo();
