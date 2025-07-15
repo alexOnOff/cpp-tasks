@@ -2,6 +2,7 @@
 
 #include "MemoryLeakage.h"
 #include "UniquePtr.h"
+#include "SharedPtr.h"
 
 int main()
 {
@@ -11,12 +12,13 @@ int main()
     // Unique pointers
     ///////////////////////////////////////////
     
-    RunUnique();
+    //RunUnique();
 
     ///////////////////////////////////////////
     // Shared pointers
     ///////////////////////////////////////////
 
+    RunShared();
 
     ///////////////////////////////////////////
     // Weak pointers
