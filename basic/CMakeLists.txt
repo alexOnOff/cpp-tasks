@@ -2,6 +2,7 @@ project(Basic)
 
 add_executable(basic
     src/main.cpp
+    src/MemoryLeakage.cpp 
 )
 
 target_include_directories(basic
