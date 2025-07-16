@@ -5,6 +5,7 @@
 #include "AnotherChild.hpp"
 #include "StepChild.hpp"
 #include "ThirdChild.hpp"
+#include "ConstructorCalling.hpp"
 
 int main()
 {
@@ -30,9 +31,22 @@ int main()
     // Destructors
     ///////////////////////////////////////////
 
-    Parent* child = new Child();
-    child->Do();
-    delete child;
+    //Parent* child = new Child();
+    //child->Do();
+    //delete child;
+
+    ///////////////////////////////////////////
+    // ConstructorCalling
+    ///////////////////////////////////////////
+
+    //{
+    //    C c = C();
+    //}
+
+    {
+        A a = A(1);
+    }
+    
 
     return 0;
 }
