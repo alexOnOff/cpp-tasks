@@ -4,19 +4,24 @@
 
 namespace gph
 {
-    template<class T>
     class Edge
     {
     public:
-        Edge(unsigned dest, T value = T()) : dest_(dest), value_(value){}
+        Edge(unsigned dest) : dest_(dest){}
+        
+        Edge(const Edge& e) 
+        {
+            dest_ = e.dest_;
+        }
+        
         virtual ~Edge(){}
 
         unsigned GetDest() { return dest_; }
 
-    protected:
-        Edge(){}
-    private:
+    protected: 
         unsigned dest_;
-        T value_;
+
+    private:
+        Edge() {}
     };
 }
