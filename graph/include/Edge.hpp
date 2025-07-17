@@ -7,7 +7,7 @@ namespace gph
     class Edge
     {
     public:
-        Edge(unsigned dest) : dest_(dest){}
+        Edge(unsigned dest) { dest_ = dest; }
         
         Edge(const Edge& e) 
         {
@@ -22,6 +22,6 @@ namespace gph
         unsigned dest_;
 
     private:
-        Edge() {}
+        Edge() { dest_ = 0u; }
     };
 }

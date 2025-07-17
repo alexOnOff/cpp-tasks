@@ -8,14 +8,19 @@ namespace gph
     class WeightEdge : public Edge
     {
     public:
-        WeightEdge(unsigned dest, T value = T()) : Edge(dest_), value_(value) {}
+        WeightEdge(unsigned dest, T value = T()) : Edge(dest)
+        {
+            value_ = value;
+        }
 
-        WeightEdge(const Edge& e)
+        WeightEdge(const WeightEdge& e) : Edge(e.dest_)
         {
             value_ = e.value_;
         }
 
         ~WeightEdge() {}
+
+        T GetValue() { return value_; }
 
     protected:
         T value_;

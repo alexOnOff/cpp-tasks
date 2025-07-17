@@ -20,13 +20,13 @@ namespace gph
 
         ~Graph(){}
 
-        void AddNodes(unsigned count = 1)
+        virtual void AddNodes(unsigned count = 1)
         {
             n_nodes_ += count;
             edges_.resize(n_nodes_);
         }
 
-        void virtual AddEdge(unsigned x, unsigned y)
+        virtual void  AddEdge(unsigned x, unsigned y)
         {
             if (auto max_node = std::max(x, y); max_node > n_nodes_)
             {

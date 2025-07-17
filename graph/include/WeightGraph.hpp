@@ -16,18 +16,24 @@ namespace gph
 
         ~WeightGraph() {}
 
-        void AddEdge(unsigned x, unsigned y, T weight = T()) override
+        void AddNodes(unsigned count = 1) override
+        {
+            n_nodes_ += count;
+            edges_.resize(n_nodes_);
+        }
+
+        void AddEdge(unsigned x, unsigned y, T weight = T())
         {
             if (auto max_node = std::max(x, y); max_node > n_nodes_)
             {
                 AddNodes(max_node - n_nodes_ + 1);
             }
 
-            Edge e = WeightEdge<T>(y, weight);
+            WeightEdge e = WeightEdge<T>(y, weight);
             edges_[x].push_back(e);
         }
 
-        void AddEdge(unsigned x, unsigned y, bool directed, T weight = T()) override
+        void AddEdge(unsigned x, unsigned y, bool directed, T weight = T())
         {
             if (directed)
             {
@@ -39,5 +45,31 @@ namespace gph
                 AddEdge(y, x, weight);
             }
         }
+
+        void Print() override
+        {
+            std::cout << "Graph: " << std::endl;
+            for (size_t i = 0; i < n_nodes_; i++)
+            {
+                for (auto& edge : edges_[i])
+                {
+                    std::cout << "        ";
+                    std::cout << edge.GetValue();
+                }
+
+                std::cout << std::endl << "Node " << i;
+
+                for (auto& edge : edges_[i])
+                {
+                    std::cout << " -----> ";
+                    std::cout << edge.GetDest();
+                }
+
+                std::cout << std::endl;
+            }
+        }
+
+    protected:
+        vector<vector<WeightEdge<T>>> edges_;
     };
 }
