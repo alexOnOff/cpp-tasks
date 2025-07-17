@@ -2,10 +2,19 @@
 #include "Edge.hpp"
 #include <vector>
 #include <iostream>
+#include <queue>
 
 namespace gph
 {
     using std::vector;
+    using std::queue;
+
+    enum NodeStatus
+    {
+        Undiscovered = 0,
+        Discovered = 1,
+        Processed = 2
+    };
 
     class Graph
     {
@@ -65,6 +74,53 @@ namespace gph
 
                 std::cout << std::endl;
             }
+        }
+
+        vector<unsigned> BFS(unsigned start_node = 0)
+        {
+            vector<unsigned> ret_val { n_nodes_ };
+            vector<NodeStatus> status {n_nodes_};
+
+            status[start_node] = Discovered;
+
+
+            return ret_val;
+        }
+
+        vector<unsigned> DFS(unsigned start_node = 0)
+        {
+            queue<unsigned> q;
+            vector<unsigned> ret_val;
+            vector<NodeStatus> status;
+
+            ret_val.reserve(n_nodes_);
+            status.resize(n_nodes_);
+
+            status[start_node] = Discovered;
+            q.push(start_node);
+            
+            while (!q.empty())
+            {
+                auto current = q.front();
+
+                if (status[current] == Discovered)
+                {
+                    for (auto& child : edges_[current])
+                    {
+                        if (auto index = child.GetDest(); status[index] == Undiscovered)
+                        {
+                            q.push(index);
+                            status[index] = Discovered;
+                        }
+                    }
+                }
+
+                status[current] = Processed;
+                ret_val.push_back(current);
+                q.pop();
+            }
+
+            return ret_val;
         }
 
     protected:

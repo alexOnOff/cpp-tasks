@@ -5,12 +5,20 @@
 
 int main()
 {
-    gph::WeightGraph<int> g;
+    gph::Graph g;
     
-    g.AddNodes(3);
-    g.AddEdge(0, 2, 1);
-    g.AddEdge(0, 1, false, 2);
+    g.AddNodes(5);
+    
+    g.AddEdge(0, 1, false);
+    g.AddEdge(0, 2, false);
+    g.AddEdge(0, 3, false);
+    g.AddEdge(1, 4, false);
     g.Print();
+
+    for (auto& val : g.DFS())
+    {
+        std::cout << val << ' ';
+    }
 
     return 0;
 }
