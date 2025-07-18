@@ -91,31 +91,27 @@ namespace gph
         {
             queue<unsigned> q;
             vector<unsigned> ret_val;
-            vector<NodeStatus> status;
+            vector<bool> visited;
 
             ret_val.reserve(n_nodes_);
-            status.resize(n_nodes_);
+            visited.resize(n_nodes_);
 
-            status[start_node] = Discovered;
+            visited[start_node] = true;
             q.push(start_node);
             
             while (!q.empty())
             {
                 auto current = q.front();
 
-                if (status[current] == Discovered)
+                for (auto& child : edges_[current])
                 {
-                    for (auto& child : edges_[current])
+                    if (auto index = child.GetDest(); !visited[index])
                     {
-                        if (auto index = child.GetDest(); status[index] == Undiscovered)
-                        {
-                            q.push(index);
-                            status[index] = Discovered;
-                        }
+                        q.push(index);
+                        visited[index] = true;
                     }
                 }
-
-                status[current] = Processed;
+                
                 ret_val.push_back(current);
                 q.pop();
             }
