@@ -64,17 +64,19 @@ namespace gph
 
     vector<unsigned> Graph::DFS(unsigned start_node)
     {
-        vector<unsigned> ret_val{ n_nodes_ };
-        //vector<NodeStatus> status {n_nodes_};
+        vector<unsigned> ret_val;
+        vector<bool> visited;
 
-        //status[start_node] = Discovered;
+        ret_val.reserve(n_nodes_);
+        visited.resize(n_nodes_);
+
+        DFS(ret_val, visited, start_node);
 
         return ret_val;
     }
 
     vector<unsigned> Graph::BFS(unsigned start_node)
     {
-        queue<unsigned> q;
         vector<unsigned> ret_val;
         vector<bool> visited;
 
@@ -82,6 +84,27 @@ namespace gph
         visited.resize(n_nodes_);
 
         BFS(ret_val, visited, start_node);
+
+        return ret_val;
+    }
+
+    vector<unsigned> Graph::DisconnectedDFS(unsigned start_node)
+    {
+        vector<unsigned> ret_val;
+        vector<bool> visited;
+
+        ret_val.reserve(n_nodes_);
+        visited.resize(n_nodes_);
+
+        DFS(ret_val, visited, start_node);
+
+        for (size_t i = 0; i < n_nodes_; i++)
+        {
+            if (!visited[i])
+            {
+                DFS(ret_val, visited, i);
+            }
+        }
 
         return ret_val;
     }
@@ -132,4 +155,17 @@ namespace gph
         }
     }
 
+    void Graph::DFS(vector<unsigned>& ret_val, vector<bool>& visited, unsigned node)
+    {
+        visited[node] = true;
+        ret_val.push_back(node);
+
+        for (auto& child : edges_[node])
+        {
+            if (!visited[child.GetDest()])
+            {
+                DFS(ret_val, visited, child.GetDest());
+            }
+        }
+    }
 }
