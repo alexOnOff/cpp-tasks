@@ -18,7 +18,7 @@ int main()
 
     g.Print();
 
-    for (auto& val : g.DFS())
+    for (auto& val : g.BFS())
     {
         std::cout << val << ' ';
     }
