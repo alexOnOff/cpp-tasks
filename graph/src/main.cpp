@@ -1,8 +1,25 @@
 #include <iostream>
 
+#include "Graph.hpp"
+#include "WeightGraph.hpp"
+
 int main()
 {
-    std::cout << "Hello graph" << std::endl;
+    gph::Graph g;
+    
+    g.AddNodes(5);
+    
+    g.AddEdge(0, 1, false);
+    g.AddEdge(1, 2, false);
+    //g.AddEdge(0, 3, false);
+    g.AddEdge(1, 4, false);
+
+    g.Print();
+
+    for (auto& val : g.DisconnectedDFS())
+    {
+        std::cout << val << ' ';
+    }
 
     return 0;
 }
