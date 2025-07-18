@@ -94,9 +94,14 @@ namespace gph
         ret_val.reserve(n_nodes_);
         visited.resize(n_nodes_);
 
-        for (auto& node_visited : visited)
+        BFS(ret_val, visited, start_node);
+
+        for (size_t i = 0; i < n_nodes_; i++)
         {
-            //if()
+            if (!visited[i])
+            {
+                BFS(ret_val, visited, i);
+            }
         }
 
         return ret_val;
