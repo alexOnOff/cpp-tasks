@@ -21,10 +21,12 @@ namespace gph
         virtual void AddEdge(unsigned x, unsigned y, bool directed);
         virtual void Print();
 
+        unsigned GetSize();
         vector<unsigned> DFS(unsigned start_node = 0);
         vector<unsigned> BFS(unsigned start_node = 0);
         vector<unsigned> DisconnectedBFS(unsigned start_node = 0);
         vector<unsigned> DisconnectedDFS(unsigned start_node = 0);
+        virtual std::shared_ptr<Graph> Prima(unsigned start_node = 0);
 
     protected:
         void BFS(vector<unsigned>& ret_val, vector<bool>& visited, unsigned start_node);

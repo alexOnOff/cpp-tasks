@@ -62,6 +62,8 @@ namespace gph
         }
     }
 
+    unsigned Graph::GetSize() { return n_nodes_; }
+
     vector<unsigned> Graph::DFS(unsigned start_node)
     {
         vector<unsigned> ret_val;
@@ -167,5 +169,37 @@ namespace gph
                 DFS(ret_val, visited, child.GetDest());
             }
         }
+    }
+
+    std::shared_ptr<Graph> Graph::Prima(unsigned start_node)
+    {
+        queue<unsigned> q;
+        vector<bool> visited;
+        std::shared_ptr<Graph> ret_val = std::make_shared<Graph>();
+
+        visited.resize(this->n_nodes_);
+        ret_val->AddNodes(this->n_nodes_);
+
+        q.push(start_node);
+        visited[start_node] = true;
+        
+        while (!q.empty() || ret_val->n_nodes_ != this->n_nodes_)
+        {
+            auto current = q.front();
+
+            for (auto& child : edges_[current])
+            {
+                if (auto index = child.GetDest(); !visited[index])
+                {
+                    q.push(index);
+                    ret_val->AddEdge(current, index);
+                    visited[index] = true;
+                }
+            }
+
+            q.pop();
+        }
+
+        return ret_val;
     }
 }
