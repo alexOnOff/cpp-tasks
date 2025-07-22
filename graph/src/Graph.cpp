@@ -183,7 +183,7 @@ namespace gph
         q.push(start_node);
         visited[start_node] = true;
         
-        while (!q.empty() || ret_val->n_nodes_ != this->n_nodes_)
+        while (!q.empty())
         {
             auto current = q.front();
 
