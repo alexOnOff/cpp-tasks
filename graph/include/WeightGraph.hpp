@@ -1,11 +1,15 @@
 #pragma once
 
+#include <utility>
+
 #include "Graph.hpp"
 #include "WeightEdge.hpp"
 
 namespace gph
 {
     using std::vector;
+    using std::priority_queue;
+    using std::pair;
 
     template<class T>
     class WeightGraph : public Graph
@@ -67,6 +71,47 @@ namespace gph
 
                 std::cout << std::endl;
             }
+        }
+
+        std::shared_ptr<Graph> Prima(unsigned start_node = 0) override
+        {
+            using dist = pair<T, unsigned>;
+
+            std::shared_ptr<WeightGraph> ret_val = std::make_shared<WeightGraph<T>>();
+            priority_queue<dist, vector<dist>, std::greater<dist>> pq; // pair<distance, node>
+            vector<bool> visited(n_nodes_, false);
+            vector<T> key(n_nodes_, INT32_MAX);
+
+            visited.resize(n_nodes_);
+            ret_val->AddNodes(this->n_nodes_);
+
+            pq.push(std::make_pair(0, start_node));
+            key[start_node] = 0;
+
+            while (!pq.empty())
+            {
+                unsigned current = pq.top().second;
+                pq.pop();
+
+                if(visited[current]) continue;
+
+                visited[current] = true;
+
+                for (auto& node : this->edges_[current])
+                {
+                    unsigned dest = node.GetDest();
+                    T weight = node.GetValue();
+
+                    if (!visited[dest] && key[dest] > weight)
+                    {
+                        key[dest] = weight; 
+                        pq.push(std::make_pair(key[dest], dest));
+                        ret_val->AddEdge(current, dest, weight);
+                    }
+                }
+            }
+
+            return ret_val;
         }
 
     protected:
