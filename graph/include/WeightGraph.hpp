@@ -80,9 +80,9 @@ namespace gph
             std::shared_ptr<WeightGraph> ret_val = std::make_shared<WeightGraph<T>>();
             priority_queue<dist, vector<dist>, std::greater<dist>> pq; // pair<distance, node>
             vector<bool> visited(n_nodes_, false);
+            vector<int> parents(n_nodes_, -1);
             vector<T> key(n_nodes_, INT32_MAX);
 
-            visited.resize(n_nodes_);
             ret_val->AddNodes(this->n_nodes_);
 
             pq.push(std::make_pair(0, start_node));
@@ -106,10 +106,15 @@ namespace gph
                     {
                         key[dest] = weight; 
                         pq.push(std::make_pair(key[dest], dest));
-                        ret_val->AddEdge(current, dest, weight);
+                        parents[dest] = current;
                     }
                 }
             }
+
+            for (size_t i = 0; i < parents.size(); i++)
+                if(parents[i] != -1)
+                    ret_val->AddEdge(parents[i], i, key[i]);
+            
 
             return ret_val;
         }
