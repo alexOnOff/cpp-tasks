@@ -11,6 +11,7 @@
 #include "OpenClosed.hpp"
 #include "LiskovSubstitution.hpp"
 #include "InterfaceSegregation.hpp"
+#include "DependencyInversion.hpp"
 
 int main()
 {
@@ -111,20 +112,30 @@ int main()
 
     // OK:
 
-    solid::i::ok::IOnlineOrder* online = new solid::i::ok::OnlineOrder();
-    solid::i::ok::IOfflineOrder* cafe = new solid::i::ok::CafeOrder();
+    //solid::i::ok::IOnlineOrder* online = new solid::i::ok::OnlineOrder();
+    //solid::i::ok::IOfflineOrder* cafe = new solid::i::ok::CafeOrder();
 
-    online->AddOrder("Pizza");
-    cafe->AddOrder("Pizza");
+    //online->AddOrder("Pizza");
+    //cafe->AddOrder("Pizza");
 
-    online->SetCost(100);
-    cafe->SetCost(100);
-    
-    online->SetAuthor("user");
-    cafe->SetTable(10);
+    //online->SetCost(100);
+    //cafe->SetCost(100);
+    //
+    //online->SetAuthor("user");
+    //cafe->SetTable(10);
 
-    delete online;
-    delete cafe;
+    //delete online;
+    //delete cafe;
+
+    // DependencyInversion
+
+    //High - level modules should not import anything from low - level modules.Both should depend on abstractions(e.g., interfaces).
+    //Abstractions should not depend on details.Details(concrete implementations) should depend on abstractions.
+
+    solid::d::ok::Cook cook;
+    solid::d::ok::IRecipe* salad = new solid::d::ok::SaladRecipe();
+    cook.SetRecipe(salad);
+    cook.Work();
 
     return 0;
 }
