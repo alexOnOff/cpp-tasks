@@ -10,6 +10,7 @@
 #include "SingleResponsibility.hpp"
 #include "OpenClosed.hpp"
 #include "LiskovSubstitution.hpp"
+#include "InterfaceSegregation.hpp"
 
 int main()
 {
@@ -87,10 +88,43 @@ int main()
 
    //OK:
 
-   solid::l::ok::ICompany* rest = new solid::l::ok::Restaurant();
-   rest->AddMoney(1000);
+   //solid::l::ok::ICompany* rest = new solid::l::ok::Restaurant();
+   //rest->AddMoney(1000);
 
-   delete rest;
+   //delete rest;
+
+   // Interface segregation
+   // Clients have not to depend on methods that they don't use
+   // Bad: 
+
+    //solid::i::bad::IOrder* online = new solid::i::bad::OnlineOrder();
+    //solid::i::bad::IOrder* cafe = new solid::i::bad::CafeOrder();
+
+    //online->AddOrder("Pizza");
+    //cafe->AddOrder("Pizza");
+
+    //online->SetCost(100);
+    //cafe->SetCost(100);
+
+    //online->SetTableNumber(10); // Exception
+    //cafe->SetTableNumber(10);
+
+    // OK:
+
+    solid::i::ok::IOnlineOrder* online = new solid::i::ok::OnlineOrder();
+    solid::i::ok::IOfflineOrder* cafe = new solid::i::ok::CafeOrder();
+
+    online->AddOrder("Pizza");
+    cafe->AddOrder("Pizza");
+
+    online->SetCost(100);
+    cafe->SetCost(100);
+    
+    online->SetAuthor("user");
+    cafe->SetTable(10);
+
+    delete online;
+    delete cafe;
 
     return 0;
 }
