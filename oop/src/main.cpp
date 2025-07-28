@@ -8,6 +8,7 @@
 #include "ConstructorCalling.hpp"
 
 #include "SingleResponsibility.hpp"
+#include "OpenClosed.hpp"
 
 int main()
 {
@@ -55,9 +56,9 @@ int main()
 
     // SingleResponsibility
 
-    solid::ok::Restaurant r;
-    solid::ok::ConsoleWaiter* cw = new solid::ok::ConsoleWaiter();
-    solid::ok::ConsoleCook* cc = new solid::ok::ConsoleCook();
+    solid::s::ok::Restaurant r;
+    solid::s::ok::ConsoleWaiter* cw = new solid::s::ok::ConsoleWaiter();
+    solid::s::ok::ConsoleCook* cc = new solid::s::ok::ConsoleCook();
 
     r.Work(cw,cc);
     
@@ -66,7 +67,11 @@ int main()
 
     // OpenClosed
 
+   /*solid::o::ok::Cook cook;
+   solid::o::ok::IRecipe* rec = new solid::o::ok::SoupRecipe();
+   cook.Work(rec);
 
+   delete rec;*/
 
     return 0;
 }
