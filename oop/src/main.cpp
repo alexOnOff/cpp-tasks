@@ -9,6 +9,7 @@
 
 #include "SingleResponsibility.hpp"
 #include "OpenClosed.hpp"
+#include "LiskovSubstitution.hpp"
 
 int main()
 {
@@ -67,11 +68,29 @@ int main()
 
     // OpenClosed
 
-   solid::o::ok::Cook cook;
-   solid::o::ok::IRecipe* rec = new solid::o::ok::SoupRecipe();
-   cook.Work(rec);
+   //solid::o::ok::Cook cook;
+   //solid::o::ok::IRecipe* rec = new solid::o::ok::SoupRecipe();
+   //cook.Work(rec);
 
-   delete rec;
+   //delete rec;
+
+   // LiskovSubstitution
+   // Preconditions can not be stronger in subclass.
+   // Postconditions can not be weaker in subclass.
+   // Invariants must be saved in subclass
+
+   ////Bad: i dont know about this realisation
+   //solid::l::bad::Restaurant* rest = new solid::l::bad::Cafe();
+
+   //// Restaurant can add big sum, but there is exception:
+   //rest->AddMoney(1000);
+
+   //OK:
+
+   solid::l::ok::ICompany* rest = new solid::l::ok::Restaurant();
+   rest->AddMoney(1000);
+
+   delete rest;
 
     return 0;
 }
