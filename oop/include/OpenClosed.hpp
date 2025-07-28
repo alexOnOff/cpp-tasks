@@ -30,12 +30,14 @@ namespace solid
             class IRecipe
             {
             public:
+                virtual ~IRecipe() {}
                 virtual void CookIt() = 0;
             };
 
             class SoupRecipe : public IRecipe
             {
             public:
+                ~SoupRecipe() {}
                 void CookIt() override
                 {
                     cout << "Cook soup step 1" << endl;
@@ -47,6 +49,7 @@ namespace solid
             class SaladRecipe : public IRecipe
             {
             public:
+                ~SaladRecipe() {} 
                 void CookIt() override
                 {
                     cout << "Cook Salad step 1" << endl;

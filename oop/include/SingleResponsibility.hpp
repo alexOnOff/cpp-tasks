@@ -74,7 +74,7 @@ namespace solid
             {
             public:
                 IWaiter() { Cash = 0; }
-                ~IWaiter() {}
+                virtual ~IWaiter() {}
 
                 virtual void GetOrder(queue<Recipe>& recipes) = 0;
                 virtual unsigned GetCash() { return Cash; }
@@ -108,7 +108,7 @@ namespace solid
             {
             public:
                 ICook() {}
-                ~ICook() {}
+                virtual ~ICook() {}
                 virtual void Work(queue<Recipe>& recipes) = 0;
             };
 

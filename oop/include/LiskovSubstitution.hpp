@@ -12,7 +12,7 @@ namespace solid
             {
             public:
                 Restaurant(){ Cash = 0; }
-                ~Restaurant(){}
+                virtual ~Restaurant(){}
                 
                 virtual void AddMoney(int cash)
                 {
@@ -57,7 +57,7 @@ namespace solid
             {
             public:
                 ICompany(){}
-                ~ICompany(){}
+                virtual ~ICompany(){}
                 virtual void AddMoney(int cash) = 0;
             protected:
                 int Cash;
