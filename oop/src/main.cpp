@@ -56,22 +56,22 @@ int main()
 
     // SingleResponsibility
 
-    solid::s::ok::Restaurant r;
-    solid::s::ok::ConsoleWaiter* cw = new solid::s::ok::ConsoleWaiter();
-    solid::s::ok::ConsoleCook* cc = new solid::s::ok::ConsoleCook();
+    //solid::s::ok::Restaurant r;
+    //solid::s::ok::ConsoleWaiter* cw = new solid::s::ok::ConsoleWaiter();
+    //solid::s::ok::ConsoleCook* cc = new solid::s::ok::ConsoleCook();
 
-    r.Work(cw,cc);
-    
-    delete cw;
-    delete cc;
+    //r.Work(cw,cc);
+    //
+    //delete cw;
+    //delete cc;
 
     // OpenClosed
 
-   /*solid::o::ok::Cook cook;
+   solid::o::ok::Cook cook;
    solid::o::ok::IRecipe* rec = new solid::o::ok::SoupRecipe();
    cook.Work(rec);
 
-   delete rec;*/
+   delete rec;
 
     return 0;
 }
