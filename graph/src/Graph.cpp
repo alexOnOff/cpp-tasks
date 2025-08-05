@@ -64,6 +64,16 @@ namespace gph
 
     unsigned Graph::GetSize() { return n_nodes_; }
 
+    unsigned Graph::GetEdgesNum()
+    {
+        unsigned count = 0;
+
+        for (auto& val : this->edges_)
+            count += val.size();
+        
+        return count;
+    }
+
     vector<unsigned> Graph::DFS(unsigned start_node)
     {
         vector<unsigned> ret_val;
@@ -198,6 +208,30 @@ namespace gph
             }
 
             q.pop();
+        }
+
+        return ret_val;
+    }
+
+    std::shared_ptr<Graph> Graph::Kruskal()
+    {
+        std::shared_ptr<Graph> ret_val = std::make_shared<Graph>();
+        vector<bool> visited;
+
+        ret_val->AddNodes(this->n_nodes_);
+        visited.resize(this->n_nodes_);
+        visited[0] = true;
+
+        for (size_t i = 0; i < this->edges_.size() && ret_val->GetEdgesNum() != ret_val->GetSize() - 1; i++) // Ost tree has n_edges = n_nodes - 1 
+        {
+            for (size_t j = 0; j < edges_[i].size(); j++)
+            {
+                if (auto index = edges_[i][j].GetDest(); !visited[index])
+                {
+                    ret_val->AddEdge(i, index);
+                    visited[index] = true;
+                }
+            }
         }
 
         return ret_val;
