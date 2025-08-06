@@ -236,4 +236,21 @@ namespace gph
 
         return ret_val;
     }
+
+    vector<Graph::SrcEdge> Graph::MakeSrcEdges()
+    {
+        vector<Graph::SrcEdge> ret_val;
+
+        ret_val.reserve(this->GetEdgesNum());
+
+        for (size_t i = 0; i < this->edges_.size(); i++)
+        {
+            for (size_t j = 0; j < this->edges_[i].size(); j++)
+            {
+                ret_val.push_back(Graph::SrcEdge(edges_[i][j], i));
+            }
+        }
+
+        return ret_val;
+    }
 }

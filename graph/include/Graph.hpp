@@ -11,6 +11,17 @@ namespace gph
 
     class Graph
     {
+        class SrcEdge : public Edge
+        {
+        public:
+            SrcEdge(unsigned dest, unsigned src) : Edge(dest) { src_ = src; }
+            SrcEdge(Edge edge, unsigned src) : Edge(edge) { src_ = src; }
+            ~SrcEdge(){}
+            unsigned GetSource() { return src_ ;}
+        protected:
+            unsigned src_;
+        };
+
     public:
         Graph();
         Graph(const Graph& g);
@@ -35,5 +46,8 @@ namespace gph
         void DFS(vector<unsigned>& ret_val, vector<bool>& visited, unsigned node);
         unsigned n_nodes_;
         vector<vector<Edge>> edges_;
+
+    private:
+        vector<SrcEdge> MakeSrcEdges();
     };
 }
