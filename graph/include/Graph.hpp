@@ -22,7 +22,7 @@ namespace gph
         virtual void Print();
 
         unsigned GetSize();
-        unsigned GetEdgesNum();
+        size_t GetEdgesNum();
         vector<unsigned> DFS(unsigned start_node = 0);
         vector<unsigned> BFS(unsigned start_node = 0);
         vector<unsigned> DisconnectedBFS(unsigned start_node = 0);

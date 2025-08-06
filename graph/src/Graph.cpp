@@ -64,9 +64,9 @@ namespace gph
 
     unsigned Graph::GetSize() { return n_nodes_; }
 
-    unsigned Graph::GetEdgesNum()
+    size_t Graph::GetEdgesNum()
     {
-        unsigned count = 0;
+        size_t count = 0;
 
         for (auto& val : this->edges_)
             count += val.size();
