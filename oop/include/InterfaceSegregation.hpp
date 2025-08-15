@@ -55,7 +55,7 @@ namespace solid
             {
             public:
                 IOrder() {}
-                virtual ~IOrder() = 0 {}
+                virtual ~IOrder() = 0;
 
                 void SetCost(unsigned cost) { cost_ = cost; }
                 void AddOrder(string ord) { names_.push_back(ord); }
@@ -71,7 +71,7 @@ namespace solid
             class IOnlineOrder : public IOrder
             {
             public:
-                ~IOnlineOrder() = 0 {}
+                ~IOnlineOrder() = 0;
 
                 virtual void SetAuthor(string a) { author_ = a; }
                 virtual string GetAuthor() { return author_; }
@@ -83,7 +83,7 @@ namespace solid
             class IOfflineOrder : public IOrder
             {
             public:
-                ~IOfflineOrder() = 0 {}
+                ~IOfflineOrder() = 0;
 
                 virtual void SetTable(unsigned n) { table_number_ = n; }
                 virtual unsigned GetTable() { return table_number_; }

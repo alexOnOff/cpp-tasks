@@ -15,12 +15,12 @@ namespace gph
     template<class T>
     class WeightGraph : public Graph
     {
-        template<class T>
-        class WeightSrcEdge : public WeightEdge<T>
+        template<typename T_>
+        class WeightSrcEdge : public WeightEdge<T_>
         {
         public:
-            WeightSrcEdge(unsigned dest, unsigned src, T value = T()) : WeightEdge<T>(dest, value) { src_ = src; }
-            WeightSrcEdge(WeightEdge<T> edge, unsigned src) : WeightEdge<T>(edge) { src_ = src; }
+            WeightSrcEdge(unsigned dest, unsigned src, T_ value = T_()) : WeightEdge<T_>(dest, value) { src_ = src; }
+            WeightSrcEdge(WeightEdge<T_> edge, unsigned src) : WeightEdge<T_>(edge) { src_ = src; }
             ~WeightSrcEdge(){}
             unsigned GetSource() { return src_; }
         protected:

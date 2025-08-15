@@ -1,5 +1,6 @@
 #include "ParallelSortTask.hpp"
 #include "QuickSort.hpp" 
+#include <algorithm>
 
 ParallelSortTask::ParallelSortTask(size_t array_size, unsigned thread_num) : thread_num_(thread_num)
 {

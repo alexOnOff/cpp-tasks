@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 void DoOne(std::unique_ptr<int> a)
 {
