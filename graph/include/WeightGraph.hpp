@@ -1,9 +1,10 @@
 #pragma once
 
 #include <utility>
-
+#include <algorithm>
 #include "Graph.hpp"
 #include "WeightEdge.hpp"
+#include "DSU.hpp"
 
 namespace gph
 {
@@ -14,6 +15,23 @@ namespace gph
     template<class T>
     class WeightGraph : public Graph
     {
+        template<class T>
+        class WeightSrcEdge : public WeightEdge<T>
+        {
+        public:
+            WeightSrcEdge(unsigned dest, unsigned src, T value = T()) : WeightEdge<T>(dest, value) { src_ = src; }
+            WeightSrcEdge(WeightEdge<T> edge, unsigned src) : WeightEdge<T>(edge) { src_ = src; }
+            ~WeightSrcEdge(){}
+            unsigned GetSource() { return src_; }
+        protected:
+            unsigned src_;
+        };
+
+        bool compWeightSrcEdge(WeightGraph::WeightSrcEdge<T> x, WeightGraph::WeightSrcEdge<T> y)
+        {
+            return x.GetValue() < y.GetValue();
+        }
+
     public:
         WeightGraph(){}
         WeightGraph(const Graph& g){}
@@ -118,8 +136,52 @@ namespace gph
 
             return ret_val;
         }
+        
+        std::shared_ptr<Graph> Kruskal() override
+        {
+            unsigned count = 0;
+            DSU dsu{this->n_nodes_ };
+            std::shared_ptr<WeightGraph> ret_val = std::make_shared<WeightGraph<T>>();
+            vector<WeightGraph::WeightSrcEdge<T>> vec_of_edges = MakeSrcEdges();
+
+            ret_val->AddNodes(this->n_nodes_);
+            std::sort(vec_of_edges.begin(), vec_of_edges.end(), [] (WeightSrcEdge<T> a, WeightSrcEdge<T> b) { return a.GetValue() < b.GetValue(); });
+
+            for (size_t i = 0; i < vec_of_edges.size(); i++)
+            {
+                size_t x = vec_of_edges[i].GetSource();
+                size_t y = vec_of_edges[i].GetDest();
+                T w = vec_of_edges[i].GetValue();
+
+                if (dsu.Find(x) != dsu.Find(y))
+                {
+                    dsu.Union(x, y);
+                    ret_val->AddEdge(x, y, w);
+                    if(++count == n_nodes_ - 1) break;
+                }
+            }
+
+            return ret_val;
+        }
 
     protected:
         vector<vector<WeightEdge<T>>> edges_;
+    private:
+        vector<WeightGraph::WeightSrcEdge<T>> MakeSrcEdges()
+        {
+            vector<WeightGraph::WeightSrcEdge<T>> ret_val;
+
+            ret_val.reserve(this->GetEdgesNum());
+
+            for (size_t i = 0; i < this->edges_.size(); i++)
+            {
+                for (size_t j = 0; j < this->edges_[i].size(); j++)
+                {
+                    ret_val.push_back(WeightSrcEdge<T>(edges_[i][j].GetDest(), i, edges_[i][j].GetValue()));
+                }
+            }
+            
+            return ret_val;
+        }
     };
 }
